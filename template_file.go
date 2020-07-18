@@ -28,7 +28,7 @@ type TemplateFile struct {
 // Returns true/false and error if creation failed.
 func (c *Client) CreateTemplateFile(f TemplateFile) error {
 	fmt.Printf("f.Name is: %s\n", f.Name)
-	_, err := c.Call("write_autoinstall_template", f.Name, f.Body, c.Token) // TODO: check name
+	_, err := c.Call("write_autoinstall_template", split(f.Name, "/")[2], f.Body, c.Token) // TODO: check name
 	return err
 }
 
