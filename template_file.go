@@ -16,6 +16,11 @@ limitations under the License.
 
 package cobblerclient
 
+import (
+	"fmt"
+	"strings"
+)
+
 // TemplateFile is the former TemplateFile
 type TemplateFile struct {
 	Name string // The name the template file will be saved in Cobbler
@@ -27,8 +32,10 @@ type TemplateFile struct {
 // Requires 3 arguments: file, data and token
 // Returns true/false and error if creation failed.
 func (c *Client) CreateTemplateFile(f TemplateFile) error {
+	nameSplit := strings.Split(f.Name, "/")
+	filename := nameSplit[len(nameSplit)-1]
 	fmt.Printf("f.Name is: %s\n", f.Name)
-	_, err := c.Call("write_autoinstall_template", split(f.Name, "/")[2], f.Body, c.Token) // TODO: check name
+	_, err := c.Call("write_autoinstall_template", filename, f.Body, c.Token) // TODO: check name
 	return err
 }
 
