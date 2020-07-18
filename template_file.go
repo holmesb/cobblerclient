@@ -17,7 +17,6 @@ limitations under the License.
 package cobblerclient
 
 import (
-	"fmt"
 	"strings"
 )
 
@@ -34,7 +33,6 @@ type TemplateFile struct {
 func (c *Client) CreateTemplateFile(f TemplateFile) error {
 	nameSplit := strings.Split(f.Name, "/")
 	filename := nameSplit[len(nameSplit)-1]
-	fmt.Printf("f.Name is: %s\n", f.Name)
 	_, err := c.Call("write_autoinstall_template", filename, f.Body, c.Token) // TODO: check name
 	return err
 }
